@@ -28,5 +28,13 @@ Class User_model extends CI_Model
 	function getLastRegistered(){
 		return $this->db->insert_id();
 	}
+	
+	public function login($id, $password){
+		$this->db->where('UserID',$id);
+		$this->db->where('Password',md5($password));
+		$query = $this->db->get('users');
+		
+		return ($query->num_rows() == 1);
+	}
 }
 ?>
