@@ -6,6 +6,7 @@ class Login extends CI_Controller {
 		parent::__construct();
 		//Load the 'User' model
 		$this->load->model('user_model');
+		$this->load->model('employee_model');
 		$this->load->library('session');
 		error_reporting (0);
 	}
@@ -33,8 +34,14 @@ class Login extends CI_Controller {
 		}
 		else
 		{
-			$data = array('UserID' => $this->input->post('id'), 'is_logged_in' => 1 );
+		
+			$empData = $this->employee_model->getEmployee($this->input->post('id'));
+			
+			$data = array('UserID' => $this->input->post('id'), 'is_logged_in' => 1, 'FormStatus' => $empData->isSubmitted , 'FormID' => $empData->UserID );
+			
 		    $this->session->set_userdata($data);
+			
+			//$udata = array( );
 			$this->load->view('member',$data);
 		}
 	}
