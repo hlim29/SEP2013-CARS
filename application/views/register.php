@@ -1,15 +1,16 @@
+<body style="padding-top:40px;text-align:center;">
 <h1>Register</h1>
 <?php echo validation_errors(); 
 	$attributes = array('class' => 'register');
 	echo form_open('register', $attributes); ?>
-<table>
+<table style="margin: 10px auto;width: 40%" class="table table-striped">
 
 <tr>
 	<td>
 		Email
 	</td>
 	<td>
-		<input type="text" name="email" placeholder="Email address">
+		<input type="text" name="email" class="form-control" placeholder="Email address">
 	</td>    
 </tr>
 <tr>
@@ -17,7 +18,7 @@
 		Password
 	</td>
 	<td>
-		<input type="password" name="password" placeholder="Password">
+		<input type="password" name="password" class="form-control" placeholder="Password">
 	</td>    
 </tr>
 <tr>
@@ -25,7 +26,7 @@
 		First Name
 	</td>
 	<td>
-		<input type="text" name="fname" placeholder="First name">
+		<input type="text" name="fname" class="form-control" placeholder="First name">
 	</td>    
 </tr>
 <tr>
@@ -33,15 +34,17 @@
 		Surname
 	</td>
 	<td>
-		<input type="text" name="lname" placeholder="Surname">
+		<input type="text" name="lname" class="form-control" placeholder="Surname">
 	</td>    
 </tr>
 <tr>
 	<td>
-		<input type="submit" value="Submit"/>
-	</td>
+	</td> 
 	<td>
-	</td>    
+		<input type="submit" class="btn btn-primary" value="Submit"/>
+	</td>
+	   
 </tr>
 </table>
 </form>
+</body>

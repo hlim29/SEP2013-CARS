@@ -8,12 +8,14 @@ class Login extends CI_Controller {
 		$this->load->model('user_model');
 		$this->load->model('employee_model');
 		$this->load->library('session');
+		$this->load->helper('url');
 		error_reporting (0);
 	}
 	 
 	function index()
 	{
 	if($this->session->userdata('is_logged_in')){
+			$this->load->view('header');
 			$this->load->view('member');
 	}
 		else{
@@ -30,6 +32,7 @@ class Login extends CI_Controller {
 		
 		if ($this->form_validation->run() === FALSE)
 		{
+			$this->load->view('header');
 			$this->load->view('login');
 		}
 		else
@@ -42,6 +45,7 @@ class Login extends CI_Controller {
 		    $this->session->set_userdata($data);
 			
 			//$udata = array( );
+			$this->load->view('header');
 			$this->load->view('member',$data);
 		}
 	}

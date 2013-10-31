@@ -18,7 +18,7 @@ class Register extends CI_Controller {
 		
 		//Some data validation.
 		$this->form_validation->set_rules('email', 'Email', 'is_unique[users.Email]');
-
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" style="width:30%;margin: 10px auto;">', '</div>');
 		$this->form_validation->set_rules('fname', 'first name', 'required');
 		$this->form_validation->set_rules('lname', 'last name', 'required');
 		$this->form_validation->set_rules('email', 'e-mail', 'required');
@@ -27,6 +27,7 @@ class Register extends CI_Controller {
 
 		//If data validation hasn't passed
 		if ($this->form_validation->run() == FALSE){
+			$this->load->view('header');
 			$this->load->view('register',$data);
 		}
 		else
@@ -53,6 +54,7 @@ class Register extends CI_Controller {
 				$data = array('UserID' => $userid, 'is_logged_in' => 1 );
 				$this->session->set_userdata($data);
 				//Load success page
+				$this->load->view('header');
 				$this->load->view('reg_success', $data);
 			}
 	}
