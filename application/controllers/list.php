@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class listview extends CI_Controller {
 
 	public function __construct()
 		{
@@ -16,28 +16,20 @@ class Main extends CI_Controller {
 		
 	public function index()
 		{
-			//$data['subjects'] = $this->subject_model->getAllSubjects();
-			$empData = $this->employee_model->getData($this->input->post('id'), 'employees');
-			$data['empData'] = $empData;
+			$data['subject'] = $this->subject_model->getAllSubjects();
 			
 			if($this->session->userdata('is_logged_in')){
 				$this->load->view('header');
-				$this->load->view('member', $data);
+				$this->load->view('list', $data);
 	}
 		else{
-		$this->validation();
+		//$this->validation();
 	}
 		
 
 		}
-
-	public function logout()
-		{
-			$this->session->sess_destroy();
-			redirect('main');
-		}
 		
-		public function validation(){
+		/*public function validation(){
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" style="width:30%;margin:30px auto;">', '</div>');
 		$this->form_validation->set_rules('id', 'UserID', 'required|callback_dbChecking');
@@ -79,7 +71,7 @@ class Main extends CI_Controller {
 			$this->form_validation->set_message('dbChecking', 'Incorrect name/password');
 			return false;
 		}
-	}
+	}*/
 	
 		
 }

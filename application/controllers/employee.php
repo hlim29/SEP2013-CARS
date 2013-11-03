@@ -43,6 +43,57 @@ class Employee extends CI_Controller {
 		}
 	}
 	
+	public function view()
+	{
+		if ($this->checkMember()){	
+			$data['eData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'emergencycontacts');		
+			$data['fData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'financials');
+			$data['cData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'citizenshipstatuses');
+			$data['empData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'employees');
+			
+			
+				$this->load->view('header');
+				$this->load->view('employee_view', $data);
+
+			
+		}
+	}
+	
+	function refreshData(){
+		
+		$empData = $this->employee_model->getData($this->session->userdata('UserID'), 'employees');
+		$sessData = array('FormStatus' => $empData->IsSubmitted,  'FormID' => $empData->UserID );
+		$this->session->set_userdata($sessData);
+	}
+	
+	public function submit(){
+		if($this->employee_model->checkAll($this->session->userdata('UserID'))){
+			$this->employee_model->submit($this->session->userdata('UserID'));
+			
+			$this->refreshData();
+			$data['saved']='Your form has been successfully submitted!';
+			
+			
+			
+			
+			redirect('main');
+			
+			}
+		else {
+		
+		$data['saved']='Your form is incomplete - please complete all four sections of your employement form';
+		$data['error']=true;
+					$this->load->view('header');
+			$this->load->view('member', $data);
+			}
+		/*
+		if one of the for,s is incomplete, send them back to ths apge wi error msh
+		els
+		sset sub flah to 1
+		send them to mem pag
+		*/
+	}	
+	
 		public function register(){
 		//Converts POSTDATA into variables
 		$uid = $this->session->userdata('UserID');
@@ -63,8 +114,9 @@ class Employee extends CI_Controller {
 		
 		//Loads the 'formsuccess' view
 		if ($result != false){
-			$data['UserID'] = 1;
-			$data['saved']=1;
+			$this->refreshData();
+			$data['saved'] = 'Your details have been successfully saved!';
+			
 			$this->load->view('header');
 			$this->load->view('member', $data);
 		}
@@ -88,10 +140,11 @@ class Employee extends CI_Controller {
 			
 		$result = $this->employee_model->financials($uid, $bsb, $accno, $branch, $institution, $isNew);
 
-		//Loads the 'formsuccess' view
+		//Loads the 'formsuccess' view$this->session->set_userdata($sessData);
 		if ($result != false){
-			$data['UserID'] = 1;
-			$data['saved']=1;
+			$this->refreshData();
+			$data['saved']='Your financial details have been successfully saved!';
+			$data['error']=false;
 			$this->load->view('header');
 			$this->load->view('member', $data);
 		}
@@ -114,8 +167,9 @@ class Employee extends CI_Controller {
 
 		//Loads the 'formsuccess' view
 		if ($result != false){
-			$data['UserID'] = 1;
-			$data['saved']=1;
+		$this->refreshData();
+			$data['saved']='Your citizenship details have been successfully saved!';
+			$data['error']=false;
 			$this->load->view('header');
 			$this->load->view('member', $data);
 		}
@@ -140,8 +194,9 @@ class Employee extends CI_Controller {
 
 		//Loads the 'formsuccess' view
 		if ($result != false){
-			$data['UserID'] = 1;
-			$data['saved']=1;
+			$this->refreshData();
+			$data['saved']='Your emergency details have been successfully saved!';
+			$data['error']=false;
 			$this->load->view('header');
 			$this->load->view('member', $data);
 		}

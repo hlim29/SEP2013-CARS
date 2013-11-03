@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class Member extends CI_Controller {
 
 	public function __construct()
 		{
@@ -16,7 +16,7 @@ class Main extends CI_Controller {
 		
 	public function index()
 		{
-			//$data['subjects'] = $this->subject_model->getAllSubjects();
+			$data['subjects'] = $this->subject_model->getAllSubjects();
 			$empData = $this->employee_model->getData($this->input->post('id'), 'employees');
 			$data['empData'] = $empData;
 			
@@ -53,7 +53,6 @@ class Main extends CI_Controller {
 			$data['subjects'] = $this->subject_model->getAllSubjects();
 			$empData = $this->employee_model->getData($this->input->post('id'), 'employees');
 			$data['empData'] = $empData;
-			
 			$status = $empData->IsSubmitted;
 			$sessData = array('UserID' => $this->input->post('id'), 'FormStatus' => $status, 'is_logged_in' => 1,  'FormID' => $empData->UserID );
 			

@@ -43,10 +43,10 @@ class Login extends CI_Controller {
 			$data = array('UserID' => $this->input->post('id'), 'is_logged_in' => 1, 'FormStatus' => $empData->isSubmitted , 'FormID' => $empData->UserID );
 			
 		    $this->session->set_userdata($data);
-			
+			redirect('member');
 			//$udata = array( );
-			$this->load->view('header');
-			$this->load->view('member',$data);
+			//$this->load->view('header');
+			//$this->load->view('member',$data);
 		}
 	}
 	

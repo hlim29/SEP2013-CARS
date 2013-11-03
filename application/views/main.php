@@ -6,7 +6,7 @@
 
 <body style="margin:70px 0 0 0;text-align:center;">
 <h1>Welcome to the RCIM system!</h1>
-<h2>Login here<h2>
+<h2>Login here</h2>
 <?php 
 
 	$this->load->helper('url');

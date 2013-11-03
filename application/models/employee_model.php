@@ -16,6 +16,26 @@ Class Employee_model extends CI_Model
 			return null;
 	}
 	
+	function submit($uid){
+		$data = array(
+			'IsSubmitted' => 1 
+			);
+		$this->db->where('userid', $uid);
+		return $this->db->update('employees', $data); 
+	}
+	
+	function checkAll($uid){
+		if ($this->employee_model->getData($uid, 'employees') == null)
+			return false;
+		if ($this->employee_model->getData($uid, 'financials') == null)
+			return false;
+		if ($this->employee_model->getData($uid, 'citizenshipstatuses') == null)
+			return false;
+		if ($this->employee_model->getData($uid, 'emergencycontacts') == null)
+			return false;
+		return true;
+	}
+	
 	function financials($uid, $bsb, $accno, $branch, $institution, $isNew){
 		$data = array(
 			'userid' =>$uid, 

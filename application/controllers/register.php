@@ -21,8 +21,10 @@ class Register extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" style="width:30%;margin: 10px auto;">', '</div>');
 		$this->form_validation->set_rules('fname', 'first name', 'required');
 		$this->form_validation->set_rules('lname', 'last name', 'required');
+		
 		$this->form_validation->set_rules('email', 'e-mail', 'required');
-		$this->form_validation->set_rules('password', 'password', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|matches[cpassword]');
+$this->form_validation->set_rules('cpassword', 'Password Confirmation', 'required');
 		$this->form_validation->set_message("is_unique", "email already exists");
 
 		//If data validation hasn't passed

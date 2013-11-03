@@ -23,6 +23,14 @@
 </tr>
 <tr>
 	<td>
+		Confirm password
+	</td>
+	<td>
+		<input type="password" name="cpassword" class="form-control" placeholder="Password">
+	</td>    
+</tr>
+<tr>
+	<td>
 		First Name
 	</td>
 	<td>
