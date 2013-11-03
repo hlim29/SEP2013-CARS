@@ -30,11 +30,16 @@ Class User_model extends CI_Model
 	}
 	
 	public function login($id, $password){
+		$this -> db -> select('userid, password');
+		$this -> db -> from('users');
 		$this->db->where('UserID',$id);
 		$this->db->where('Password',md5($password));
-		$query = $this->db->get('users');
+		$query = $this->db->get();
 		
-		return ($query->num_rows() == 1);
+		if($query->num_rows() == 1)
+			return $query->result();
+		else
+			return false;
 	}
 }
 ?>

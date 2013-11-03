@@ -40,8 +40,8 @@ class Main extends CI_Controller {
 		public function validation(){
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" style="width:30%;margin:30px auto;">', '</div>');
-		$this->form_validation->set_rules('id', 'UserID', 'required|callback_dbChecking');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('id', 'UserID', 'trim|xss_clean|required|callback_dbChecking');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 		
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -67,12 +67,13 @@ class Main extends CI_Controller {
 	}
 	
 	public function dbChecking(){
-		$this->load->model('user_model');
 		$id = $this->input->post('id');
 		$password = $this->input->post('password');
+		if (ctype_digit($id))
 		$result = $this->user_model->login($id, $password);
-		
-		if ($result == true){
+		else
+		$result = false;
+		if ($result){
 			return true;
 		}
 		else {

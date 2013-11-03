@@ -69,8 +69,10 @@ class Member extends CI_Controller {
 		$this->load->model('user_model');
 		$id = $this->input->post('id');
 		$password = $this->input->post('password');
-		$result = $this->user_model->login($id, $password);
-		
+		if (ctype_digit($id))
+			$result = $this->user_model->login($id, $password);
+		else
+			$result = false;
 		if ($result == true){
 			return true;
 		}
