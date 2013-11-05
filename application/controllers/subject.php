@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class listview extends CI_Controller {
+class Subject extends CI_Controller {
 
 	public function __construct()
 		{
@@ -17,27 +17,54 @@ class listview extends CI_Controller {
 		}
 		
 	public function index()
-		{
-			$data['subjects'] = $this->subject_model->getAllSubjects();
-			
-			if($this->session->userdata('is_logged_in')){
-				$this->load->view('header');
-				$this->load->view('list', $data);
-	}
+	{
+		$data['subjects'] = $this->subject_model->getAllSubjects();
+
+		if($this->session->userdata('is_logged_in') && $this->isAdmin()){
+			$this->load->view('header');
+			$this->load->view('list', $data);
+		}
 	}
 	
 	public function admin()
 	{
-	$data['subjects'] = $this->subject_model->getAllSubjects();
+		$data['subjects'] = $this->subject_model->getAllSubjects();
 
-	if($this->session->userdata('is_logged_in') && $this->session->userdata('Privilege')==3){
-		$this->load->view('header');
-		$this->load->view('listsuba', $data);
+		if($this->session->userdata('is_logged_in') && $this->isAdmin()){
+			$this->load->view('header');
+			$this->load->view('listsuba', $data);
+		}
 	}
+	
+	public function edit()
+	{	
+		$this->load->helper(array('form', 'url'));
+		
+		if ($this->uri->segment(3) === FALSE)
+			$isNew = TRUE;
+		else
+			$id = $this->uri->segment(3);
+		$data['subject'] = $this->subject_model->getSubject($id);
+		$data['coordinators'] = $this->employee_model->getType(2);
+		$this->load->view('header');
+		$this->load->view('editsubject', $data);
+	}
+	
+	public function submit(){
+		$id = $this->input->post('id');
+		$name = $this->input->post('name');
+		$coordinator = $this->input->post('coordinator');
+		
+		
+
+		$this->subject_model->updateSubject($id, $name, $coordinator);
+
+
+		$this->admin();
 	}
 
 	
-	public function employees(){
+	/*public function employees(){
 		if ($this->isAdmin()){
 			$data['users'] = $this->user_model->getAllUserData();
 			$this->load->view('header');
@@ -62,7 +89,7 @@ class listview extends CI_Controller {
 			$this->load->view('listemployees', $data);
 		
 		}
-	}
+	}*/
 	
 	public function isAdmin(){
 		if ($this->session->userdata('Privilege')!=3){

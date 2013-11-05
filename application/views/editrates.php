@@ -5,7 +5,7 @@
 	?>
 	
 <table style="margin: 10px auto;width: 40%" class="table table-striped">
-<input hidden type="text" name="id" value="<?php echo $rate->RateID; ?>">
+<input hidden type="text" name="id" value="<?php if ($isNew) {} else echo $rate->RateID; ?>">
 <tr>
 	<td>
 		Level
@@ -49,3 +49,5 @@
 </table>
 </form>
 </body>
+<script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-1.7.1.min.js'?>"></script>
+<script type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap.min.js'?>"></script>

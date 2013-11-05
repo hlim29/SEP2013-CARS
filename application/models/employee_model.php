@@ -16,6 +16,14 @@ Class Employee_model extends CI_Model
 			return null;
 	}
 	
+	function getType($type){
+		$this->db->select('*');
+		$this->db->from('employees');
+		$this->db->join('users', 'employees.UserID = users.UserID',  'inner');
+		$this->db->where('users.PrivilegeID',$type);
+		return $this->db->get();
+	}
+	
 	function submit($uid){
 		$data = array(
 			'IsSubmitted' => 1 

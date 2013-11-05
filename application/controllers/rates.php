@@ -36,12 +36,28 @@ class Rates extends CI_Controller {
 		$this->load->view('editrates', $data);
 	}
 	
+	public function create()
+	{	
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		
+		//$rateID = 0;
+		//$data['rate'] = $this->rates_model->getRate($rateID);
+		$data['isNew'] = TRUE;
+		$this->load->view('header');
+		$this->load->view('editrates', $data);
+	}
+	
+	
 	public function submit(){
 		$id = $this->input->post('id');
 		$level = $this->input->post('level');
 		$type = $this->input->post('type');
 		$desc = $this->input->post('desc');
 		$amount = $this->input->post('amount');
+		if ($id=='')
+		$this->rates_model->insertRate($id, $level, $type, $desc, $amount);
+		else
 		$this->rates_model->updateRate($id, $level, $type, $desc, $amount);
 		
 		$data['rates'] = $this->rates_model->getRates();

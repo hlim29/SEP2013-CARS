@@ -2,18 +2,16 @@
 
 </head>
 <body style="margin:70px auto;text-align:center;">
-<h1>Users List</h1>
+<h1>Subject List</h1>
 <?php 
 		echo '<table id="table" style="margin: 10px auto;width: 80%" class="table table-striped tablesorter">';
-		echo '<thead><tr><th>User ID</th><th>Email</th><th>Name</th><th>Actions</th></tr> </thead><tbody>';
-		foreach ($users->result() as $user){
+		echo '<thead><tr><th>Subject Name</th><th>Subject ID</th><th>Subject Coordinator</th><th>Actions</th></tr> </thead><tbody>';
+		foreach ($subjects->result() as $subject){
 			echo '<tr>';
-			echo '<td>' . $user->UserID . '</td>' ;
-			echo '<td>' . $user->Email . '</td>' ;
-			echo '<td>' . $user->FirstName . ' ' . $user->LastName . '</td>' ;
-			echo '<td>' . '<a href="listview/send" class="request" id="' . $subject->SubjectID . '">Deactivate</a>';
-			echo ' | ';
-			echo '<a href="mailto:'.$user->Email.'" class="">Email</a></td>';
+			echo '<td>' . $subject->SubjectName . '</td>' ;
+			echo '<td>' . $subject->SubjectID . '</td>' ;
+			echo '<td>' . $subject->FirstName . ' ' . $subject->LastName . '</td>' ;
+			echo '<td>' . '<a href="../subject/edit/'. $subject->SubjectID . '">Edit</a></td>';
 			echo '</tr>';
 		}
 		echo '</tbody></table>';
@@ -24,7 +22,7 @@
 <script src="<?php echo base_url().'assets/js/jquery.tablesorter.js'?>"></script>
 <script>
   $(function() {
-    $("#table").tablesorter({ sortList: [[0,0]] });
+    $("#table").tablesorter({ sortList: [[1,0]] });
   });
   	$('.request').click(function(event) {
 		event.preventDefault();

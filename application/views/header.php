@@ -43,22 +43,38 @@
 			<?php } ?>
         </ul>
           </li>
-
+<?php if ($this->session->userdata('Privilege')==1){?>
           <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contracts<b class="caret"></b></a>
         <ul class="dropdown-menu">
 			<li><a href="<?php echo base_url('index.php/listview'); ?>">Create a new contract</a></li>
           <li><a href="<?php echo base_url('index.php/listview/existing'); ?>">View contracts</a></li>
-          
+         
         </ul>
           </li>
+		   <?php } ?>
 			<?php if ($this->session->userdata('Privilege')==3){?>
           <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users<b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="<?php echo base_url('index.php/adminregister'); ?>">Register Account</a></li>
           <li><a href="<?php echo base_url('index.php/listview/employees'); ?>">View Users</a></li>
-          <li><a href="<?php echo base_url('index.php/#'); ?>">Manage Pay Rates</a></li>
+        </ul>
+          </li>
+			<?php } ?>
+						<?php if ($this->session->userdata('Privilege')==3){?>
+          <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pay Rates<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<?php echo base_url('index.php/listview/viewrates'); ?>">View/Manage Pay Rates</a></li>
+        </ul>
+          </li>
+			<?php } ?>
+						<?php if ($this->session->userdata('Privilege')==3){?>
+          <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Subjects<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<?php echo base_url('index.php/subject/admin'); ?>">View/Edit Subjects</a></li>
         </ul>
           </li>
 			<?php } ?>
@@ -83,12 +99,6 @@
            ?>
     </div>
 	</div>
-
-
-
-
-
-    <!-- Placed at the end of the document so the pages load faster -->
 
 
 

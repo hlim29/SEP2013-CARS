@@ -30,6 +30,16 @@ Class Rates_model extends CI_Model
 			return $this->db->update('rates', $data); 
 			//return true;
 		}
+	
+	function insertRate($id, $level, $type, $desc, $amount){
+		$data = array(
+			'levelname' => $level, 
+			'type' => $type, 
+			'description' => $desc, 
+			'payrate' => $amount
+		);
+		return $this->db->insert('rates', $data); 
+	}
 		
 	
 	//Retrieves the ID of the person who last registered
