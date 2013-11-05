@@ -1,41 +1,36 @@
 <?php
-Class User_model extends CI_Model
+Class Rates_model extends CI_Model
 {
     function __construct()
     {
         parent::__construct();
 		$this->load->database();
     }
+	function getRates(){
+	return $this->db->get('rates');
+	}
 	
-	function register($email, $firstname, $lastname, $password){
+	function getRate($id){
+		$this -> db -> select('*');
+		$this -> db -> from('rates');
+		$this->db->where('RateID',$id);
+		$query = $this->db->get();
+		return $query -> row();
+	}
 	
-			//NOTE: Ensure that the settings in 'application/config/database.php' are correct!
-			
-			//Builds the query
-			$data = array(
-				'email' => $email,
-				'password' => $password
+	function updateRate($id, $level, $type, $desc, $amount){
+		$data = array(
+			'levelname' => $level, 
+			'type' => $type, 
+			'description' => $desc, 
+			'payrate' => $amount
 			);
 			
-			//Executes + returns whether if successful (T for success, F for fail)
-			return $this -> db -> insert('users',$data);
-
-	}
-	
-	function adminRegister($email, $password){
-	
-		//NOTE: Ensure that the settings in 'application/config/database.php' are correct!
+			$this->db->where('rateid', $id);
+			return $this->db->update('rates', $data); 
+			//return true;
+		}
 		
-		//Builds the query
-		$data = array(
-			'email' => $email,
-			'password' => $password
-		);
-		
-		//Executes + returns whether if successful (T for success, F for fail)
-		$this -> db -> insert('users',$data);
-		return $this->db->insert_id();
-	}
 	
 	//Retrieves the ID of the person who last registered
 	function getLastRegistered(){

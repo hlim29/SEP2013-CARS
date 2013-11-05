@@ -48,17 +48,17 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contracts<b class="caret"></b></a>
         <ul class="dropdown-menu">
 			<li><a href="<?php echo base_url('index.php/listview'); ?>">Create a new contract</a></li>
-          <li><a href="<?php echo base_url('index.php/'); ?>">View contracts</a></li>
+          <li><a href="<?php echo base_url('index.php/listview/existing'); ?>">View contracts</a></li>
           
         </ul>
           </li>
-			<?php if ($this->session->userdata('privilege')==3){?>
+			<?php if ($this->session->userdata('Privilege')==3){?>
           <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="<?php echo base_url('index.php/#'); ?>">Register Account</a></li>
-          <li><a href="<?php echo base_url('index.php/#'); ?>">View Users</a></li>
-          <li><a href="<?php echo base_url('index.php/#'); ?>">My Account</a></li>
+          <li><a href="<?php echo base_url('index.php/adminregister'); ?>">Register Account</a></li>
+          <li><a href="<?php echo base_url('index.php/listview/employees'); ?>">View Users</a></li>
+          <li><a href="<?php echo base_url('index.php/#'); ?>">Manage Pay Rates</a></li>
         </ul>
           </li>
 			<?php } ?>

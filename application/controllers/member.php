@@ -52,9 +52,10 @@ class Member extends CI_Controller {
 		{
 			$data['subjects'] = $this->subject_model->getAllSubjects();
 			$empData = $this->employee_model->getData($this->input->post('id'), 'employees');
+			$uData = $this->employee_model->getData($this->input->post('id'), 'users');
 			$data['empData'] = $empData;
 			$status = $empData->IsSubmitted;
-			$sessData = array('UserID' => $this->input->post('id'), 'FormStatus' => $status, 'is_logged_in' => 1,  'FormID' => $empData->UserID );
+			$sessData = array('UserID' => $this->input->post('id'), 'Privilege' => $uData->Privilege, 'FormStatus' => $status, 'is_logged_in' => 1,  'FormID' => $empData->UserID, 'EmpID' => $empData->EmployeeID );
 			
 			
 		    $this->session->set_userdata($sessData);
@@ -69,10 +70,8 @@ class Member extends CI_Controller {
 		$this->load->model('user_model');
 		$id = $this->input->post('id');
 		$password = $this->input->post('password');
-		if (ctype_digit($id))
-			$result = $this->user_model->login($id, $password);
-		else
-			$result = false;
+		$result = $this->user_model->login($id, $password);
+		
 		if ($result == true){
 			return true;
 		}

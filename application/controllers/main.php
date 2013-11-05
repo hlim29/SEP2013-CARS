@@ -52,11 +52,10 @@ class Main extends CI_Controller {
 		{
 			$data['subjects'] = $this->subject_model->getAllSubjects();
 			$empData = $this->employee_model->getData($this->input->post('id'), 'employees');
+			$uData = $this->employee_model->getData($this->input->post('id'), 'users');
 			$data['empData'] = $empData;
-			
 			$status = $empData->IsSubmitted;
-			$sessData = array('UserID' => $this->input->post('id'), 'FormStatus' => $status, 'is_logged_in' => 1,  'FormID' => $empData->UserID );
-			
+			$sessData = array('UserID' => $this->input->post('id'), 'Privilege' => $uData->PrivilegeID, 'FormStatus' => $status, 'is_logged_in' => 1,  'FormID' => $empData->UserID, 'EmpID' => $empData->EmployeeID  );
 			
 		    $this->session->set_userdata($sessData);
 			

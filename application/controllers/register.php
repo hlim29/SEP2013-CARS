@@ -41,12 +41,11 @@ $this->form_validation->set_rules('cpassword', 'Password Confirmation', 'require
 	function register(){
 			//Converts POSTDATA into variables
 			$email = $this->input->post('email');
-			$firstname = $this->input->post('fname');
-			$lastname = $this->input->post('lname');
+		
 			$password = md5($this->input->post('password'));
 			
 			//Sends the data to the model for insertion. $result is a boolean - if registration was successful, the value will be true
-			$result = $this->user_model->register($email, $firstname, $lastname, $password);
+			$result = $this->user_model->register($email, $password);
 			
 			//Loads the 'formsuccess' view
 			if ($result != false){

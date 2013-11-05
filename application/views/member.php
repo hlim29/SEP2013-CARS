@@ -4,7 +4,7 @@
 <body style="margin:70px auto;text-align:center;">
 <h1>Welcome to the member's area!</h1>
 <?php //echo $this->session->userdata('UserID'); 
-
+print_r($this->session->all_userdata());
 if ($saved)
 	echo '<div class="alert alert-success" style="width:30%;margin:30px auto;">'. $saved .'</div>';
 

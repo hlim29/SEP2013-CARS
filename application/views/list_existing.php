@@ -2,18 +2,20 @@
 
 </head>
 <body style="margin:70px auto;text-align:center;">
-<h1>Subject List</h1>
+<h1>Your Subject List</h1>
 <?php 
 		echo '<table id="table" style="margin: 10px auto;width: 80%" class="table table-striped tablesorter">';
-		echo '<thead><tr><th>Subject Name</th><th>Subject ID</th><th>Subject Coordinator</th><th>Actions</th></tr> </thead><tbody>';
+		echo '<thead><tr><th>Subject Name</th><th>Subject ID</th><th>Subject Coordinator</th><th>Status</th></tr> </thead><tbody>';
 		foreach ($subjects->result() as $subject){
 			echo '<tr>';
 			echo '<td>' . $subject->SubjectName . '</td>' ;
 			echo '<td>' . $subject->SubjectID . '</td>' ;
 			echo '<td>' . $subject->FirstName . ' ' . $subject->LastName . '</td>' ;
-			echo '<td>' . '<a href="listview/send" class="request" id="' . $subject->SubjectID . '">Send request</a>';
-			echo ' | ';
-			echo '<a href="mailto:'.$subject->Email.'" class="request">Email</a></td>';
+			echo '<td>';
+			if ($subject->Status==0) echo 'In progress';
+			else if ($subject->Status==1) echo 'Rejected';
+			else if ($subject->Status==2) echo 'Accepted';
+			echo '</td>';
 			echo '</tr>';
 		}
 		echo '</tbody></table>';

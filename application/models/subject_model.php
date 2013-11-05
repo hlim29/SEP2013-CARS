@@ -21,7 +21,8 @@ Class Subject_model extends CI_Model
 	function getAllSubjects(){
 		$this->db->select('*');
 		$this->db->from('subjects');
-		$this->db->join('employees', 'employees.UserID = subjects.SubjectCoordinator');
+		$this->db->join('employees', 'employees.UserID = subjects.SubjectCoordinator',  'inner');
+		$this->db->join('users', 'users.UserID = employees.UserID');
 		return $this->db->get();
 		
 	}

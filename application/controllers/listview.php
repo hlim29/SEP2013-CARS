@@ -10,6 +10,8 @@ class listview extends CI_Controller {
 			$this->load->model('employee_model');
 			$this->load->model('subject_model');
 			$this->load->model('user_model');
+			$this->load->model('rates_model');
+			$this->load->model('contract_model');
 			$this->load->library('form_validation');
 			error_reporting (0);
 		}
@@ -22,56 +24,60 @@ class listview extends CI_Controller {
 				$this->load->view('header');
 				$this->load->view('list', $data);
 	}
-		else{
-		//$this->validation();
 	}
-		
 
-		}
-		
-		/*public function validation(){
-		$this->load->library('form_validation');
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" style="width:30%;margin:30px auto;">', '</div>');
-		$this->form_validation->set_rules('id', 'UserID', 'required|callback_dbChecking');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		
-		if ($this->form_validation->run() === FALSE)
-		{
+	
+	public function employees(){
+		if ($this->isAdmin()){
+			$data['users'] = $this->user_model->getAllUserData();
 			$this->load->view('header');
-			$this->load->view('main');
-		}
-		else
-		{
-			$data['subjects'] = $this->subject_model->getAllSubjects();
-			$empData = $this->employee_model->getData($this->input->post('id'), 'employees');
-			$data['empData'] = $empData;
-			
-			$status = $empData->IsSubmitted;
-			$sessData = array('UserID' => $this->input->post('id'), 'FormStatus' => $status, 'is_logged_in' => 1,  'FormID' => $empData->UserID );
-			
-			
-		    $this->session->set_userdata($sessData);
-			
-			//$udata = array( );
-			$this->load->view('header');
-			$this->load->view('member',$data);
+			$this->load->view('listemployees', $data);
+		
 		}
 	}
 	
-	public function dbChecking(){
-		$this->load->model('user_model');
-		$id = $this->input->post('id');
-		$password = $this->input->post('password');
-		$result = $this->user_model->login($id, $password);
+	public function viewrates(){
+		if ($this->isAdmin()){
+			$data['rates'] = $this->rates_model->getRates();
+			$this->load->view('header');
+			$this->load->view('listpay', $data);
 		
-		if ($result == true){
-			return true;
 		}
-		else {
-			$this->form_validation->set_message('dbChecking', 'Incorrect name/password');
+	}
+	
+	public function addrates(){
+		if ($this->isAdmin()){
+			$data['rates'] = $this->rates_model->getAllUserData();
+			$this->load->view('header');
+			$this->load->view('listemployees', $data);
+		
+		}
+	}
+	
+	public function isAdmin(){
+		if ($this->session->userdata('Privilege')!=3){
+			//redirect('nopermission');
 			return false;
 		}
-	}*/
+		return true;
+	}
+		
+		
+		
+				public function send(){
+			$id = $this->input->post('subjectid');
+			$eid = $this->session->userdata('EmpID');
+			$result = $this->contract_model->assignUser($eid, $id);
+				redirect('main');
+		}
+		
+		
+		public function existing(){
+			$eID = $this->session->userdata('EmpID');
+			$data['subjects'] = $this->contract_model->getContracts($eID);
+			$this->load->view('header');
+			$this->load->view('list_existing', $data);
+		}
 	
 		
 }

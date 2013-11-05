@@ -31,22 +31,6 @@
 </tr>
 <tr>
 	<td>
-		First Name
-	</td>
-	<td>
-		<input type="text" name="fname" class="form-control" placeholder="First name">
-	</td>    
-</tr>
-<tr>
-	<td>
-		Surname
-	</td>
-	<td>
-		<input type="text" name="lname" class="form-control" placeholder="Surname">
-	</td>    
-</tr>
-<tr>
-	<td>
 	</td> 
 	<td>
 		<input type="submit" class="btn btn-primary" value="Submit"/>

@@ -2,18 +2,21 @@
 
 </head>
 <body style="margin:70px auto;text-align:center;">
-<h1>Subject List</h1>
+<h1>View Pay Rates</h1>
 <?php 
+if ($msg)
+	echo '<div class="alert alert-success" style="width:30%;margin:30px auto;">'. $msg .'</div>';
+	
 		echo '<table id="table" style="margin: 10px auto;width: 80%" class="table table-striped tablesorter">';
-		echo '<thead><tr><th>Subject Name</th><th>Subject ID</th><th>Subject Coordinator</th><th>Actions</th></tr> </thead><tbody>';
-		foreach ($subjects->result() as $subject){
+		echo '<thead><tr><th>Rate ID</th><th>Level</th><th>Description</th><th>Rate</th><th>Delete</th><th>Edit</th></tr> </thead><tbody>';
+		foreach ($rates->result() as $rate){
 			echo '<tr>';
-			echo '<td>' . $subject->SubjectName . '</td>' ;
-			echo '<td>' . $subject->SubjectID . '</td>' ;
-			echo '<td>' . $subject->FirstName . ' ' . $subject->LastName . '</td>' ;
-			echo '<td>' . '<a href="listview/send" class="request" id="' . $subject->SubjectID . '">Send request</a>';
-			echo ' | ';
-			echo '<a href="mailto:'.$subject->Email.'" class="request">Email</a></td>';
+			echo '<td>' . $rate->RateID . '</td>' ;
+			echo '<td>' . $rate->LevelName . '</td>' ;
+			echo '<td>' . $rate->Description . '</td>' ;
+			echo '<td>' . $rate->PayRate  . '</td>';
+			echo '<td><input type=checkbox></input></td>';
+			echo '<td><a href="' . base_url('index.php/rates/edit/'.$rate->RateID) . '">Edit</a></td>';
 			echo '</tr>';
 		}
 		echo '</tbody></table>';
@@ -24,7 +27,7 @@
 <script src="<?php echo base_url().'assets/js/jquery.tablesorter.js'?>"></script>
 <script>
   $(function() {
-    $("#table").tablesorter({ sortList: [[1,0]] });
+    $("#table").tablesorter({ sortList: [[0,0]] });
   });
   	$('.request').click(function(event) {
 		event.preventDefault();
