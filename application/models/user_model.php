@@ -7,7 +7,7 @@ Class User_model extends CI_Model
 		$this->load->database();
     }
 	
-	function register($email, $firstname, $lastname, $password){
+	function register($email, $password){
 	
 			//NOTE: Ensure that the settings in 'application/config/database.php' are correct!
 			

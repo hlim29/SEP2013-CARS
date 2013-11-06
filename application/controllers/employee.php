@@ -9,6 +9,7 @@ class Employee extends CI_Controller {
 			$this->load->helper('url');
 			$this->load->model('employee_model');
 			$this->load->model('user_model');
+			$this->load->helper('form');
 			error_reporting (0);
 		}
 		
@@ -21,6 +22,7 @@ class Employee extends CI_Controller {
 			$data['empData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'employees');
 			
 			$this->session->set_userdata($udata);
+			$this->load->helper('form');
 			$this->load->helper(array('form', 'url'));
 			$this->load->library('form_validation');
 			
@@ -51,11 +53,56 @@ class Employee extends CI_Controller {
 			$data['cData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'citizenshipstatuses');
 			$data['empData'] = $this->employee_model->getData($this->session->userdata('UserID'), 'employees');
 			
+				$this->load->helper(array('form', 'url'));
+			$this->load->library('form_validation');
 			
+			//Some data validation.
+			
+			$this->form_validation->set_rules('fname', 'first name', 'required');
+			$this->form_validation->set_rules('lname', 'last name', 'required');
 				$this->load->view('header');
 				$this->load->view('employee_view', $data);
-
+		}
+	}
+	
+	public function cview(){
+		if ($this->checkMember()){	
+		$id = $this->uri->segment(3);
+			$data['eData'] = $this->employee_model->getData($id, 'emergencycontacts');		
+			$data['fData'] = $this->employee_model->getData($id, 'financials');
+			$data['cData'] = $this->employee_model->getData($id, 'citizenshipstatuses');
+			$data['empData'] = $this->employee_model->getData($id, 'employees');
 			
+				$this->load->helper(array('form', 'url'));
+			$this->load->library('form_validation');
+			
+			//Some data validation.
+			
+
+				$this->load->view('header');
+				$this->load->view('employee_view', $data);
+		}
+	}
+	
+	public function adminView()
+	{
+		if ($this->checkMember()){	
+			$id = $this->uri->segment(3);
+				$this->load->helper(array('form', 'url'));
+			$this->load->library('form_validation');
+			
+			//Some data validation.
+			
+			$this->form_validation->set_rules('fname', 'first name', 'required');
+			$this->form_validation->set_rules('lname', 'last name', 'required');
+			$data['eData'] = $this->employee_model->getData($id, 'emergencycontacts');		
+			$data['fData'] = $this->employee_model->getData($id, 'financials');
+			$data['cData'] = $this->employee_model->getData($id, 'citizenshipstatuses');
+			$data['empData'] = $this->employee_model->getData($id, 'employees');
+			
+			
+				$this->load->view('header');
+				$this->load->view('employee_admin', $data);
 		}
 	}
 	
@@ -68,35 +115,28 @@ class Employee extends CI_Controller {
 	
 	public function submit(){
 		if($this->employee_model->checkAll($this->session->userdata('UserID'))){
-			$this->employee_model->submit($this->session->userdata('UserID'));
-			
-			$this->refreshData();
-			$data['saved']='Your form has been successfully submitted!';
-			
-			
-			
-			
-			redirect('main');
-			
-			}
+		$this->employee_model->submit($this->session->userdata('UserID'));
+
+		$this->refreshData();
+		$data['saved']='Your form has been successfully submitted!';
+		redirect('main');
+		}
 		else {
-		
+
 		$data['saved']='Your form is incomplete - please complete all four sections of your employement form';
 		$data['error']=true;
-					$this->load->view('header');
-			$this->load->view('member', $data);
-			}
-		/*
-		if one of the for,s is incomplete, send them back to ths apge wi error msh
-		els
-		sset sub flah to 1
-		send them to mem pag
-		*/
+		$this->load->view('header');
+		$this->load->view('member', $data);
+		}
 	}	
 	
 		public function register(){
 		//Converts POSTDATA into variables
+		if ($this->input->post('userid'))
+		$uid = $this->input->post('userid');
+		else
 		$uid = $this->session->userdata('UserID');
+		
 		$t = $this->input->post('title');
 		$fname = $this->input->post('fname');
 		$mname = $this->input->post('mname');
@@ -125,7 +165,11 @@ class Employee extends CI_Controller {
 		public function financial(){
 
 		//Converts POSTDATA into variables
+		if ($this->input->post('userid'))
+		$uid = $this->input->post('userid');
+		else
 		$uid = $this->session->userdata('UserID');
+		
 		$bsb = $this->input->post('bsb');
 		$accno = $this->input->post('accno');
 		$branch = $this->input->post('branch');
@@ -153,7 +197,11 @@ class Employee extends CI_Controller {
 	public function citizenship(){
 
 		//Converts POSTDATA into variables
+				if ($this->input->post('userid'))
+		$uid = $this->input->post('userid');
+		else
 		$uid = $this->session->userdata('UserID');
+		
 		$cissue = $this->input->post('cissue');
 		$ppno = $this->input->post('ppno');
 		$vtype = $this->input->post('vtype');
@@ -178,7 +226,11 @@ class Employee extends CI_Controller {
 	public function emergency(){
 
 		//Converts POSTDATA into variables
+				if ($this->input->post('userid'))
+		$uid = $this->input->post('userid');
+		else
 		$uid = $this->session->userdata('UserID');
+		
 		$gname = $this->input->post('gname');
 		$sname = $this->input->post('sname');
 		$relation = $this->input->post('relation');

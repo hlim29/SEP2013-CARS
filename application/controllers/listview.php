@@ -55,6 +55,13 @@ class listview extends CI_Controller {
 		}
 	}
 	
+	public function rates(){
+			$data['rates'] = $this->rates_model->getRates();
+			$this->load->view('header');
+			$this->load->view('listpay', $data);
+		
+	}
+	
 	public function addrates(){
 		if ($this->isAdmin()){
 			$data['rates'] = $this->rates_model->getAllUserData();

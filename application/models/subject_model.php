@@ -29,7 +29,7 @@ Class Subject_model extends CI_Model
 		}
 		else{
 		$data = array(
-			'subjectid' => $id,
+			'subjectid' => (int)$id,
 			'subjectname' => $name, 
 			'subjectcoordinator' => $coordinator 
 			);

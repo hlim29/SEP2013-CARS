@@ -1,5 +1,5 @@
 <body style="padding-top:40px;text-align:center;">
-<h1>Edit subject</h1>
+<h1>Create/Edit subject</h1>
 <?php //echo validation_errors(); 
 	echo form_open('subject/submit'); 
 	?>
@@ -10,7 +10,11 @@
 		Subject ID
 	</td>
 	<td>
-		<input type="text" name="id" class="form-control" value="<?php echo $subject->SubjectID; ?>" readOnly="true">
+		<input type="number" name="id" class="form-control" value="<?php 
+		if ($subject->SubjectID) {
+		echo $subject->SubjectID; 
+		echo '" readOnly="true';}
+		?>">
 
 	</td>    
 </tr>

@@ -17,6 +17,9 @@
 		echo '</tbody></table>';
 
 ?>
+<a href="<?php echo base_url().'index.php/subject/edit'?>"><button class="btn btn-primary">Create a new subject</button></a>
+<input type="submit" class="btn btn-danger" value="Delete checked subjects"/>
+
 <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-1.7.1.min.js'?>"></script>
 <script type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap.min.js'?>"></script>
 <script src="<?php echo base_url().'assets/js/jquery.tablesorter.js'?>"></script>

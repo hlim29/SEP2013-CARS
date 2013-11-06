@@ -57,7 +57,7 @@ class Subject extends CI_Controller {
 		
 		
 
-		$this->subject_model->updateSubject($id, $name, $coordinator);
+		$this->subject_model->insertSubject($id, $name, $coordinator);
 
 
 		$this->admin();

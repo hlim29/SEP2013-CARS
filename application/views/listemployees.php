@@ -13,7 +13,7 @@
 			echo '<td>' . $user->FirstName . ' ' . $user->LastName . '</td>' ;
 			echo '<td>' . '<a href="listview/send" class="request" id="' . $subject->SubjectID . '">Deactivate</a>';
 			echo ' | ';
-			echo '<a href="mailto:'.$user->Email.'" class="">Email</a></td>';
+			echo '<a href="' . base_url() .'index.php/employee/adminview/' . $user->UserID . '">Edit details</a></td>';
 			echo '</tr>';
 		}
 		echo '</tbody></table>';

@@ -18,12 +18,20 @@
 			else
 				echo '<h1>Edit your details</h1>';
 
-
-			echo validation_errors();
-			echo form_open('employee', $attributes);
+			echo form_open('employee/register', $attributes);
 
 			?>
 			<table style="margin: 10px auto;width: 40%" class="table table-striped">
+			<tr>
+				<td>
+					User ID
+				</td>
+				<td>
+					<input type="text" name="userid" class="form-control" placeholder="Title" readOnly="true" value="<?php
+			echo $empData->UserID;
+			?>">
+				</td>    
+			</tr>
 			<tr>
 				<td>
 					Title
@@ -169,6 +177,16 @@
 			<table style="margin: 10px auto;width: 40%" class="table table-striped" >
 			<tr>
 				<td>
+					User ID
+				</td>
+				<td>
+					<input type="text" name="userid" class="form-control" placeholder="Title" readOnly="true" value="<?php
+			echo $empData->UserID;
+			?>">
+				</td>    
+			</tr>
+			<tr>
+				<td>
 					Institution Name
 				</td>
 				<td>
@@ -229,6 +247,16 @@
 			<table style="margin: 10px auto;width: 40%" class="table table-striped">
 			<tr>
 				<td>
+					User ID
+				</td>
+				<td>
+					<input type="text" name="userid" class="form-control" placeholder="Title" readOnly="true" value="<?php
+			echo $empData->UserID;
+			?>">
+				</td>    
+			</tr>
+			<tr>
+				<td>
 					Citizenship Status
 				</td>
 				<td>
@@ -287,6 +315,16 @@
 			?>
 			<h1>Emergency Contact</h1>
 			<table style="margin: 10px auto;width: 40%" class="table table-striped">
+			<tr>
+				<td>
+					User ID
+				</td>
+				<td>
+					<input type="text" name="userid" class="form-control" placeholder="Title" readOnly="true" value="<?php
+			echo $empData->UserID;
+			?>">
+				</td>    
+			</tr>
 			<tr>
 				<td>
 					GivenName

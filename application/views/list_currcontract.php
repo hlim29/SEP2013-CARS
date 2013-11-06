@@ -2,20 +2,17 @@
 
 </head>
 <body style="margin:70px auto;text-align:center;">
-<h1>Your Subject List</h1>
+<h1>Subject List</h1>
 <?php 
 		echo '<table id="table" style="margin: 10px auto;width: 80%" class="table table-striped tablesorter">';
-		echo '<thead><tr><th>Subject Name</th><th>Subject ID</th><th>Subject Coordinator</th><th>Status</th></tr> </thead><tbody>';
-		foreach ($subjects->result() as $subject){
+		echo '<thead><tr><th>Subject Name</th><th>Subject ID</th><th>Employee</th><th>Actions</th></tr> </thead><tbody>';
+		foreach ($contracts->result() as $subject){
 			echo '<tr>';
 			echo '<td>' . $subject->SubjectName . '</td>' ;
 			echo '<td>' . $subject->SubjectID . '</td>' ;
-			echo '<td>' . $subject->FirstName . ' ' . $subject->LastName . '</td>' ;
-			echo '<td>';
-			if ($subject->Status==0) echo '<a href="'. base_url() . 'index.php/contract/view/' . $subject->ContractNo . '">In Progress</a>';
-			else if ($subject->Status==1) echo 'Rejected';
-			else if ($subject->Status==2) echo '<a href="'. base_url() . 'index.php/contract/view/' . $subject->ContractNo . '"> Accepted</a>';
-			echo '</td>';
+			echo '<td>' . '<a href="'. base_url() .'index.php/employee/cview/' . $subject->UserID . '">' . $subject->FirstName . ' ' . $subject->LastName . '</a></td>' ;
+			
+			echo '<td>'. '<a href="'. base_url() .'index.php/contract/view/' . $subject->ContractNo . '">View contract</a>' . '</td>';
 			echo '</tr>';
 		}
 		echo '</tbody></table>';
