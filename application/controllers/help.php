@@ -11,20 +11,9 @@ class help extends CI_Controller{
 	}
 	
 	public function index(){		
-	if($this->checkMember()){
+	
 			$this->load->view('header');
 			$this->load->view('help');
 	}		
-	}
-	
-	public function checkMember(){
-		if($this->session->userdata('is_logged_in')==1){
-			return true;
-			}
-        else{					
-			redirect('main');
-			return false;
-		}
-	}
-}
+	}	
 ?>

@@ -10,21 +10,9 @@ class FAQ extends CI_Controller{
 			error_reporting (0);	
 	}
 	
-	public function index(){		
-	if($this->checkMember()){
+	public function index(){
 			$this->load->view('header');
-			$this->load->view('FAQ');
-	}		
-	}
-	
-	public function checkMember(){
-		if($this->session->userdata('is_logged_in')==1){
-			return true;
-			}
-        else{					
-			redirect('main');
-			return false;
-		}
+			$this->load->view('FAQ');		
 	}
 }
 ?>
