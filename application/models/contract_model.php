@@ -66,7 +66,7 @@ Class Contract_model extends CI_Model
 	$this->db->select('*');
 		$this->db->from('contracts');
 		$this->db->join('subjects', 'contracts.SubjectNumber = subjects.SubjectID');
-		$this->db->join('employees', 'subjects.SubjectCoordinator = employees.EmployeeID');
+		$this->db->join('employees', 'contracts.EmployeeID = employees.EmployeeID');
 		$this->db->where('contracts.EmployeeID',$eID);
 		return $this->db->get();
 	}

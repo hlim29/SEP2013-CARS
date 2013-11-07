@@ -47,7 +47,7 @@
 					First Name
 				</td>
 				<td>
-					<input type="text" name="fname" class="form-control" placeholder="First name" value="<?php
+					<input type="text" name="fname" maxlength="20" class="form-control" placeholder="First name" value="<?php
 			echo $empData->FirstName;
 			?>">
 				</td>    
@@ -57,7 +57,7 @@
 					Middle Name
 				</td>
 				<td>
-					<input type="text" name="mname" class="form-control" placeholder="Middle Name" value="<?php
+					<input type="text" name="mname" maxlength="20" class="form-control" placeholder="Middle Name" value="<?php
 			echo $empData->MiddleName;
 			?>">
 				</td>    
@@ -67,7 +67,7 @@
 					Surname
 				</td>
 				<td>
-					<input type="text" name="lname" class="form-control" placeholder="Surname" value="<?php
+					<input type="text" name="lname" maxlength="20" class="form-control" placeholder="Surname" value="<?php
 			echo $empData->LastName;
 			?>">
 				</td>    
@@ -118,7 +118,7 @@
 					Postcode
 				</td>
 				<td>
-					<input type="text" name="pcode" class="form-control" placeholder="Postcode" value="<?php
+					<input type="text" name="pcode" maxlength="4" class="form-control" placeholder="Postcode" value="<?php
 			echo $empData->Postcode;
 			?>">
 				</td>    
@@ -210,7 +210,7 @@
 					BSB Number
 				</td>
 				<td>
-					<input type="text" name="bsb" required="true" class="form-control" placeholder="BSB Number" value="<?php
+					<input type="text" name="bsb" maxlength="6" required="true" class="form-control" placeholder="BSB Number" value="<?php
 			echo $fData->BSB;
 			?>">
 				</td>    
@@ -220,7 +220,7 @@
 					Account Number
 				</td>
 				<td>
-					<input type="text" name="accno" required="true" class="form-control" placeholder="Account Number" value="<?php
+					<input type="text" name="accno" maxlength="10" required="true" class="form-control" placeholder="Account Number" value="<?php
 			echo $fData->AccountNo;
 			?>">
 				</td>    
@@ -270,7 +270,7 @@
 					Visa Type
 				</td>
 				<td>
-					<input type="text" name="vtype" class="form-control" placeholder="Visa Type" value="<?php
+					<input type="text" name="vtype" maxlength="20" class="form-control" placeholder="Visa Type" value="<?php
 			echo $cData->VisaType;
 			?>">
 				</td>    
@@ -280,7 +280,7 @@
 					Passport Number
 				</td>
 				<td>
-					<input type="text" name="ppno" class="form-control" placeholder="Passport Number" value="<?php
+					<input type="text" name="ppno" maxlength="20" class="form-control" placeholder="Passport Number" value="<?php
 			echo $cData->PassportNo;
 			?>">
 				</td>    
@@ -290,7 +290,7 @@
 					Country Of Issue
 				</td>
 				<td>
-					<input type="text" name="cissue" class="form-control" placeholder="Country of issue for the passport" value="<?php
+					<input type="text" name="cissue" maxlength="20" class="form-control" placeholder="Country of issue for the passport" value="<?php
 			echo $cData->CountryOfIssue;
 			?>">
 				</td>    
@@ -330,7 +330,7 @@
 					GivenName
 				</td>
 				<td>
-					<input type="text" name="gname" required="true" class="form-control" placeholder="Given Name" value="<?php
+					<input type="text" name="gname" maxlength="20" required="true" class="form-control" placeholder="Given Name" value="<?php
 			echo $eData->GivenName;
 			?>">
 				</td>    
@@ -340,7 +340,7 @@
 					Surname
 				</td>
 				<td>
-					<input type="text" name="sname" required="true" class="form-control" placeholder="Surname" value="<?php
+					<input type="text" name="sname" maxlength="20" required="true" class="form-control" placeholder="Surname" value="<?php
 			echo $eData->Surname;
 			?>">
 				</td>    
@@ -350,7 +350,7 @@
 					Relationship
 				</td>
 				<td>
-					<input type="text" name="relation" required="true" class="form-control" placeholder="Relationship" value="<?php
+					<input type="text" name="relation" maxlength="20" required="true" class="form-control" placeholder="Relationship" value="<?php
 			echo $eData->Relationship;
 			?>">
 				</td>    

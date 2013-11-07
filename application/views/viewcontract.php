@@ -104,7 +104,7 @@
 	<option value="">Please select a rate level</option>
 		<?php
 		foreach ($rates->result() as $rate){
-		if ($contract->LevelName == $rate->LevelName)
+		if ($contract->HourlyRate == $rate->RateID)
 			echo '<option value="' . $rate->LevelName . '" selected>Level ' . $rate->LevelName . ' $' . $rate->PayRate . '</option>';
 		else
 			echo '<option value="' . $rate->LevelName . '">Level ' . $rate->LevelName . ' $' . $rate->PayRate . '</option>';
